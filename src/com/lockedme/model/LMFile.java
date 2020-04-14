@@ -1,4 +1,4 @@
-package com.lokedme.model;
+package com.lockedme.model;
 
 import java.time.LocalDateTime;
 
