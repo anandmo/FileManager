@@ -44,6 +44,10 @@ public class LMFile {
         return filePath;
     }
 
+    public void setFileSize(double fileSize) {
+        this.fileSize = fileSize;
+    }
+
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
