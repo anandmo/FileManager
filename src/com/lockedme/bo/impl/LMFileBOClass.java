@@ -11,7 +11,8 @@ public class LMFileBOClass implements LMFileBO {
     @Override
     public boolean addLMFile(String fileName,String fileType) throws LMFileException {
 
-        if(!lmDirectory.createRootDirectory()) {
+        boolean isRoot = lmDirectory.createRootDirectory();
+        if(!isRoot) {
             LMFile lmFile = new LMFile(fileName,fileType,lmDirectory.getRoot());
             return true;
         }

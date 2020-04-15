@@ -11,9 +11,10 @@ public class LMFile {
     private LocalDateTime fileCreationTime, lastModificationTime;
     private String fileType, fileName, filePath;
     private double fileSize;
-
+    private String fileSeparator = System.getProperty("file.separator");
     public LMFile(String fileName,String fileType,String filePath) throws LMFileException{
-        String absolutePath = filePath+fileName+"."+fileType;
+        String absolutePath = filePath+fileSeparator+fileName+"."+fileType;
+        System.out.println(absolutePath);
         File file = new File(absolutePath);
         this.fileCreationTime = LocalDateTime.now();
         this.fileName = fileName;
