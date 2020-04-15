@@ -1,5 +1,9 @@
 package com.lockedme.model;
 
+import com.lockedme.exception.LMFileException;
+
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class LMFile {
@@ -7,6 +11,20 @@ public class LMFile {
     private LocalDateTime fileCreationTime, lastModificationTime;
     private String fileType, fileName, filePath;
     private double fileSize;
+
+    public LMFile(String fileName,String fileType,String filePath) throws LMFileException{
+        String absolutePath = filePath+fileName+"."+fileType;
+        File file = new File(absolutePath);
+        this.fileCreationTime = LocalDateTime.now();
+        this.fileName = fileName;
+        this.fileType = fileType;
+        this.filePath = absolutePath;
+        try {
+            if (!file.createNewFile()) throw new LMFileException();
+        } catch (IOException exp){
+            System.out.println("File cannot be Created");
+        }
+    }
 
     public LocalDateTime getFileCreationTime() {
         return fileCreationTime;

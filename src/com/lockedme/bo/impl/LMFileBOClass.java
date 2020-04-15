@@ -6,10 +6,15 @@ import com.lockedme.model.LMFile;
 
 public class LMFileBOClass implements LMFileBO {
 
-
+    private LMDirectory lmDirectory = new LMDirectory();
 
     @Override
-    public boolean addLMFile(String fileName) throws LMFileException {
+    public boolean addLMFile(String fileName,String fileType) throws LMFileException {
+
+        if(!lmDirectory.createRootDirectory()) {
+            LMFile lmFile = new LMFile(fileName,fileType,lmDirectory.getRoot());
+            return true;
+        }
         return false;
     }
 
