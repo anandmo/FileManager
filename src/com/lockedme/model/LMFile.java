@@ -4,9 +4,10 @@ import com.lockedme.exception.LMFileException;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class LMFile {
+public class LMFile implements Serializable {
 
     private LocalDateTime fileCreationTime, lastModificationTime;
     private String fileType, fileName, filePath;

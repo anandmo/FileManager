@@ -3,6 +3,7 @@ package com.lockedme.dao.impl;
 import com.lockedme.dao.LMFileDAO;
 import com.lockedme.model.LMFile;
 
+import java.io.*;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,4 +52,40 @@ public class LMFileDAOClass implements LMFileDAO {
         }
 
     }
+
+    private void persistFileMap() {
+
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream("data.lmfdb");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(fileMap);
+            objectOutputStream.close();
+            fileOutputStream.close();
+        }catch (FileNotFoundException exp){
+             System.out.println("LM Database not found");
+        }catch (IOException exp){
+            System.out.println("Error while persisting data");
+        }
+    }
+
+    private void fetchFileMap(){
+
+        try {
+            FileInputStream fileInputStream = new FileInputStream("data.lmfdb");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            fileMap = (LinkedHashMap)objectInputStream.readObject();
+            objectInputStream.close();
+            fileInputStream.close();
+
+        }catch(FileNotFoundException exp) {
+            System.out.println("LM Database not found");
+        }catch (IOException exp){
+            System.out.println("Error while fetching data");
+        }catch (ClassNotFoundException exp){
+            System.out.println("No data found on database");
+        }
+
+
+    }
+
 }
