@@ -12,6 +12,7 @@ public class LMFile {
     private String fileType, fileName, filePath;
     private double fileSize;
     private String fileSeparator = System.getProperty("file.separator");
+
     public LMFile(String fileName,String fileType,String filePath) throws LMFileException{
         String absolutePath = filePath+fileSeparator+fileName+"."+fileType;
         System.out.println(absolutePath);

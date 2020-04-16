@@ -6,7 +6,6 @@ import com.lockedme.model.LMFile;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LMFileDAOClass implements LMFileDAO {
@@ -29,6 +28,10 @@ public class LMFileDAOClass implements LMFileDAO {
 
     @Override
     public boolean deleteLMFileFromStorage(String fileName) {
+
+        if(fileMap.remove(fileName.toLowerCase(),fileMap.get(fileName.toLowerCase())))
+            return true;
+
         return false;
     }
 

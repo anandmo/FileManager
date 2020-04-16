@@ -5,6 +5,8 @@ import com.lockedme.dao.impl.LMFileDAOClass;
 import com.lockedme.exception.LMFileException;
 import com.lockedme.model.LMFile;
 
+import java.io.File;
+
 public class LMFileBOClass implements LMFileBO {
 
     private LMDirectory lmDirectory = new LMDirectory();
@@ -23,8 +25,13 @@ public class LMFileBOClass implements LMFileBO {
     }
 
     @Override
-    public void deleteLMFile(String fileName) throws LMFileException {
+    public boolean deleteLMFile(String fileName) throws LMFileException {
 
+        File file = new File(lmFileDAOClass.findLMFileFromStorage(fileName).getFilePath());
+        if(file.delete() && lmFileDAOClass.deleteLMFileFromStorage(fileName))
+            return true;
+
+        return false;
     }
 
     @Override

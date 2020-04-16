@@ -6,7 +6,7 @@
  public interface LMFileBO {
 
   public boolean addLMFile(String fileName,String fileType) throws LMFileException;
-  public void deleteLMFile(String fileName) throws LMFileException;
+  public boolean deleteLMFile(String fileName) throws LMFileException;
   public LMFile searchLMFile(String fileName) throws LMFileException;
   public void listAllFiles() throws LMFileException;
 

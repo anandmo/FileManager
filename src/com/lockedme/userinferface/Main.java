@@ -2,6 +2,7 @@ package com.lockedme.userinferface;
 
 import com.lockedme.bo.impl.LMFileBOClass;
 import com.lockedme.exception.LMFileException;
+import com.lockedme.model.LMFile;
 
 import java.util.Scanner;
 
@@ -19,8 +20,11 @@ public class Main {
 
     public static void main(String[] args) {
 
+        String filename,filetype;
         LMFileBOClass lmFileBOClass = new LMFileBOClass();
+        LMFile lmFile;
         Scanner input = new Scanner(System.in);
+        Scanner fileinput = new Scanner(System.in);
         int user_input,user_input2;
         do {
             System.out.println(ANSI_YELLOW+"============Welcome to File Manager 1.0==================="+ANSI_RESET);
@@ -40,34 +44,63 @@ public class Main {
                     break;
 
                 case 2:
+                    do {
                     System.out.println(ANSI_YELLOW+"============Welcome to File Manager 1.0==================="+ANSI_RESET);
                     System.out.println("1. Add file");
                     System.out.println("2. Search file");
                     System.out.println("3. Delete file");
                     System.out.println("4. Main menu");
                     user_input2 = input.nextInt();
-                    do {
+
                     switch (user_input2) {
 
                             case 1:
-                                Scanner fileinput = new Scanner(System.in);
+
                                 System.out.println("Enter filename");
-                                String filename = fileinput.nextLine();
+                                filename = fileinput.nextLine();
                                 System.out.println("Enter filetype");
-                                String filetype = fileinput.nextLine();
+                                filetype = fileinput.nextLine();
 
                                 try {
                                     lmFileBOClass.addLMFile(filename, filetype);
                                 } catch (LMFileException exp) {
-                                    System.out.println("Not added");
+                                    System.out.println("Error will adding file");
                                 }
 
                                 break;
 
                             case 2:
+                                System.out.println("Enter filename");
+                                filename = fileinput.nextLine();
+
+                                try {
+                                    lmFile = lmFileBOClass.searchLMFile(filename);
+                                    if (lmFile != null){
+                                        System.out.println("File Found with below details");
+                                        System.out.println("File Name : "+lmFile.getFileName());
+                                        System.out.println("File Type : "+lmFile.getFileType());
+                                        System.out.println("Created on : "+lmFile.getFileCreationTime());
+                                    } else
+                                        System.out.println("File was not found");
+
+                                } catch (LMFileException exp) {
+                                    System.out.println("Error will searching file");
+                                }
+
                                 break;
 
                             case 3:
+                                System.out.println("Enter filename");
+                                filename = fileinput.nextLine();
+                                try {
+                                    if(lmFileBOClass.deleteLMFile(filename))
+                                        System.out.println("File deleted");
+                                    else System.out.println("File was not found");
+
+                                }catch (LMFileException exp){
+                                    System.out.println("Error while deleting file");
+                                }
+
                                 break;
 
                             case 4:
