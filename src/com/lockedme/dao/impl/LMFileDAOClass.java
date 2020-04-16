@@ -4,7 +4,10 @@ import com.lockedme.dao.LMFileDAO;
 import com.lockedme.model.LMFile;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LMFileDAOClass implements LMFileDAO {
 
@@ -31,6 +34,18 @@ public class LMFileDAOClass implements LMFileDAO {
 
     @Override
     public void displayAllLMFileFromStorage() {
+
+        //Set<String> fileNameSet = fileMap.keySet();
+
+        List<String> fileNameSet = fileMap.keySet().stream().sorted().collect(Collectors.toList());
+
+        for(String fileName : fileNameSet) {
+
+            LMFile fileObj = fileMap.get(fileName);
+
+            System.out.println("File Name : "+fileObj.getFileName()+", File Type : "+fileObj.getFileType()+", Created on : "+fileObj.getFileCreationTime());
+
+        }
 
     }
 }

@@ -36,5 +36,7 @@ public class LMFileBOClass implements LMFileBO {
     @Override
     public void listAllFiles() throws LMFileException {
 
+        lmFileDAOClass.displayAllLMFileFromStorage();
+
     }
 }
