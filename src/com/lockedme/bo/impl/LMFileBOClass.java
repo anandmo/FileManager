@@ -16,21 +16,22 @@ public class LMFileBOClass implements LMFileBO {
     public boolean addLMFile(String fileName,String fileType) throws LMFileException {
 
         boolean isRoot = lmDirectory.createRootDirectory();
-        if(!isRoot) {
+       // if(isRoot) {
             LMFile lmFile = new LMFile(fileName,fileType,lmDirectory.getRoot());
             System.out.println(lmFileDAOClass.addLMFileToStorage(lmFile));
             return true;
-        }
-        return false;
+       // }
+       // return false;
     }
 
     @Override
     public boolean deleteLMFile(String fileName) throws LMFileException {
 
-        File file = new File(lmFileDAOClass.findLMFileFromStorage(fileName).getFilePath());
-        if(file.delete() && lmFileDAOClass.deleteLMFileFromStorage(fileName))
-            return true;
-
+        if(lmFileDAOClass.findLMFileFromStorage(fileName) != null) {
+            File file = new File(lmFileDAOClass.findLMFileFromStorage(fileName).getFilePath());
+            if (file.delete() && lmFileDAOClass.deleteLMFileFromStorage(fileName))
+                return true;
+        }
         return false;
     }
 
@@ -49,10 +50,7 @@ public class LMFileBOClass implements LMFileBO {
 
     @Override
     public boolean deleteAllLMFiles() throws LMFileException{
-
-        File file = new File(lmDirectory.getRoot());
         lmFileDAOClass.deleteAllLMFileFromStorage();
-        return file.delete();
-
+        return lmDirectory.deleteRootDirectory();
     }
 }

@@ -4,6 +4,7 @@ import com.lockedme.bo.impl.LMFileBOClass;
 import com.lockedme.exception.LMFileException;
 import com.lockedme.model.LMFile;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -15,11 +16,12 @@ public class Main {
     public static void main(String[] args) {
 
         String filename,filetype;
+        boolean gotoMainMenu = false;
         LMFileBOClass lmFileBOClass = new LMFileBOClass();
         LMFile lmFile;
         Scanner input = new Scanner(System.in);
         Scanner fileinput = new Scanner(System.in);
-        int user_input,user_input2;
+        int user_input,user_input2 = 0;
         do {
             System.out.println(ANSI_YELLOW+"============Welcome to File Manager 1.0==================="+ANSI_RESET);
             System.out.println("1. List All File in root");
@@ -45,7 +47,8 @@ public class Main {
                     System.out.println("3. Delete file");
                     System.out.println("4. Delete Everything");
                     System.out.println("5. Main menu");
-                    user_input2 = input.nextInt();
+                    try {
+                        user_input2 = input.nextInt();
 
                     switch (user_input2) {
 
@@ -106,8 +109,9 @@ public class Main {
                             } catch (LMFileException exp){
                                 System.out.println("Error while cleaning root directory");
                             }
-
+                              break;
                             case 5:
+                                gotoMainMenu = true;
                                 break;
 
 
@@ -116,7 +120,13 @@ public class Main {
                                 System.out.println("Invalid input");
 
                         }
-                    }while (user_input2 != 5);
+
+                    } catch (InputMismatchException excp){
+                        System.out.println("Invalid Input");
+                        input = new Scanner(System.in);
+                    }
+
+                    }while (!gotoMainMenu);
 
 
                     break;

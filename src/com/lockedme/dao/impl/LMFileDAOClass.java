@@ -35,7 +35,10 @@ public class LMFileDAOClass implements LMFileDAO {
 
     @Override
     public LMFile findLMFileFromStorage(String fileName) {
+        if(fileMap != null)
         return fileMap.get(fileName.toLowerCase());
+        else
+            return null;
     }
 
     @Override
@@ -51,17 +54,19 @@ public class LMFileDAOClass implements LMFileDAO {
     @Override
     public void displayAllLMFileFromStorage() {
 
-        //Set<String> fileNameSet = fileMap.keySet();
+        if(fileMap != null) {
+            List<String> fileNameSet = fileMap.keySet().stream().sorted().collect(Collectors.toList());
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
 
-        List<String> fileNameSet = fileMap.keySet().stream().sorted().collect(Collectors.toList());
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+            for (String fileName : fileNameSet) {
 
-        for(String fileName : fileNameSet) {
+                LMFile fileObj = fileMap.get(fileName);
 
-            LMFile fileObj = fileMap.get(fileName);
+                System.out.println("File Name : " + fileObj.getFileName() + ", File Type : " + fileObj.getFileType() + ", Created on : " + fileObj.getFileCreationTime().format(dateTimeFormatter));
 
-            System.out.println("File Name : "+fileObj.getFileName()+", File Type : "+fileObj.getFileType()+", Created on : "+fileObj.getFileCreationTime().format(dateTimeFormatter));
-
+            }
+        } else {
+            System.out.println("No Files to display");
         }
 
     }
@@ -69,6 +74,7 @@ public class LMFileDAOClass implements LMFileDAO {
     @Override
     public void deleteAllLMFileFromStorage() {
         fileMap = null;
+        persistFileMap();
     }
 
     private void persistFileMap() {
