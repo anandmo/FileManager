@@ -5,11 +5,11 @@ import java.io.File;
 public class LMDirectory {
 
     private String fileSeparator = System.getProperty("file.separator");
-   // private String root = "C:"+fileSeparator+"FileManager"+fileSeparator+"root";
-   private String root = "C:"+fileSeparator+"Users"+fileSeparator+"Anand Mohan"+fileSeparator+"FileManager";
+    private String root;
 
    public LMDirectory(){
-
+      String userProfile = System.getenv("USERPROFILE");
+      root = userProfile+fileSeparator+"FileManager";
    }
 
     public boolean createRootDirectory() {
