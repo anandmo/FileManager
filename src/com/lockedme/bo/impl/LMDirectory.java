@@ -8,6 +8,10 @@ public class LMDirectory {
    // private String root = "C:"+fileSeparator+"FileManager"+fileSeparator+"root";
    private String root = "C:"+fileSeparator+"Users"+fileSeparator+"Anand Mohan"+fileSeparator+"FileManager";
 
+   public LMDirectory(){
+
+   }
+
     public boolean createRootDirectory() {
         File file = new File(root);
         return file.mkdir();
