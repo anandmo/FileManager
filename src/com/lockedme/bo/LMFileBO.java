@@ -9,5 +9,6 @@
   public boolean deleteLMFile(String fileName) throws LMFileException;
   public LMFile searchLMFile(String fileName) throws LMFileException;
   public void listAllFiles() throws LMFileException;
+  public boolean deleteAllLMFiles()throws LMFileException;
 
 }

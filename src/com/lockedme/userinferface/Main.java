@@ -9,14 +9,8 @@ import java.util.Scanner;
 public class Main {
 
     public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
+
 
     public static void main(String[] args) {
 
@@ -49,7 +43,8 @@ public class Main {
                     System.out.println("1. Add file");
                     System.out.println("2. Search file");
                     System.out.println("3. Delete file");
-                    System.out.println("4. Main menu");
+                    System.out.println("4. Delete Everything");
+                    System.out.println("5. Main menu");
                     user_input2 = input.nextInt();
 
                     switch (user_input2) {
@@ -103,14 +98,25 @@ public class Main {
 
                                 break;
 
-                            case 4:
+                        case 4:
+                            try {
+                                if(lmFileBOClass.deleteAllLMFiles())
+                                    System.out.println("Cleaned Root");
+                                else System.out.println("Root not found, Please make sure you have created files at least once.");
+                            } catch (LMFileException exp){
+                                System.out.println("Error while cleaning root directory");
+                            }
+
+                            case 5:
                                 break;
+
+
 
                             default:
                                 System.out.println("Invalid input");
 
                         }
-                    }while (user_input2 != 4);
+                    }while (user_input2 != 5);
 
 
                     break;

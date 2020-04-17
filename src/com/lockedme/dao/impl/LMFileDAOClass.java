@@ -66,6 +66,11 @@ public class LMFileDAOClass implements LMFileDAO {
 
     }
 
+    @Override
+    public void deleteAllLMFileFromStorage() {
+        fileMap = null;
+    }
+
     private void persistFileMap() {
 
         try {

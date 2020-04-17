@@ -8,5 +8,6 @@ boolean addLMFileToStorage(LMFile lmFile);
 LMFile findLMFileFromStorage(String fileName);
 boolean deleteLMFileFromStorage(String fileName);
 void displayAllLMFileFromStorage();
+void deleteAllLMFileFromStorage();
 
 }

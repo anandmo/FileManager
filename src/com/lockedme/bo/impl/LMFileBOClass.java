@@ -46,4 +46,13 @@ public class LMFileBOClass implements LMFileBO {
         lmFileDAOClass.displayAllLMFileFromStorage();
 
     }
+
+    @Override
+    public boolean deleteAllLMFiles() throws LMFileException{
+
+        File file = new File(lmDirectory.getRoot());
+        lmFileDAOClass.deleteAllLMFileFromStorage();
+        return file.delete();
+
+    }
 }
