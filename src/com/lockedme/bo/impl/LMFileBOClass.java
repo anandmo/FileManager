@@ -18,7 +18,7 @@ public class LMFileBOClass implements LMFileBO {
         boolean isRoot = lmDirectory.createRootDirectory();
        // if(isRoot) {
             LMFile lmFile = new LMFile(fileName,fileType,lmDirectory.getRoot());
-            System.out.println(lmFileDAOClass.addLMFileToStorage(lmFile));
+            //System.out.println(lmFileDAOClass.addLMFileToStorage(lmFile));
             return true;
        // }
        // return false;

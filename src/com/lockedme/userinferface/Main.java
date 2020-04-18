@@ -4,6 +4,8 @@ import com.lockedme.bo.impl.LMFileBOClass;
 import com.lockedme.exception.LMFileException;
 import com.lockedme.model.LMFile;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -11,6 +13,7 @@ public class Main {
     public static void main(String[] args) {
 
         String filename,filetype;
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
         boolean gotoMainMenu = false,exitApplication =false;
         LMFileBOClass lmFileBOClass = new LMFileBOClass();
         LMFile lmFile;
@@ -74,7 +77,7 @@ public class Main {
                                                 System.out.println("File Found with below details");
                                                 System.out.println("File Name : " + lmFile.getFileName());
                                                 System.out.println("File Type : " + lmFile.getFileType());
-                                                System.out.println("Created on : " + lmFile.getFileCreationTime());
+                                                System.out.println("Created on : " + lmFile.getFileCreationTime().format(dateTimeFormatter));
                                             } else
                                                 System.out.println("File was not found");
 

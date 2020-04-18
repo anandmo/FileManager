@@ -17,14 +17,6 @@ public class LMDirectory {
         return file.mkdir();
     }
 
-    public boolean createRootDirectory(String drive,String folderName) {
-        String customPath = drive+fileSeparator+folderName;
-        root = customPath;
-        File file = new File(customPath);
-        return file.mkdir();
-
-    }
-
     public String getRoot() {
         return root;
     }
