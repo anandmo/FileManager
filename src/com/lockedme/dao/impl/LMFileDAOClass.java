@@ -4,7 +4,6 @@ import com.lockedme.dao.LMFileDAO;
 import com.lockedme.model.LMFile;
 
 import java.io.*;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.LinkedHashMap;
@@ -25,7 +24,14 @@ public class LMFileDAOClass implements LMFileDAO {
 
     @Override
     public boolean addLMFileToStorage(LMFile lmFile) {
+
+        if(fileMap != null){
         if(!fileMap.containsKey(lmFile.getFileName().toLowerCase())) {
+            fileMap.put(lmFile.getFileName().toLowerCase(), lmFile);
+            persistFileMap();
+            return true;
+        } } else {
+            fileMap = new LinkedHashMap<>();
             fileMap.put(lmFile.getFileName().toLowerCase(), lmFile);
             persistFileMap();
             return true;
@@ -54,7 +60,10 @@ public class LMFileDAOClass implements LMFileDAO {
     @Override
     public void displayAllLMFileFromStorage() {
 
-        if(fileMap != null) {
+        if(fileMap == null || fileMap.isEmpty()) {
+            System.out.println("No Files to display");
+        } else {
+
             List<String> fileNameSet = fileMap.keySet().stream().sorted().collect(Collectors.toList());
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
 
@@ -65,8 +74,6 @@ public class LMFileDAOClass implements LMFileDAO {
                 System.out.println("File Name : " + fileObj.getFileName() + ", File Type : " + fileObj.getFileType() + ", Created on : " + fileObj.getFileCreationTime().format(dateTimeFormatter));
 
             }
-        } else {
-            System.out.println("No Files to display");
         }
 
     }
